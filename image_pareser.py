@@ -1,10 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
+from time import sleep
+import random
 
 
 def image_data():
-    image_number = 0
+    image_number = 1
     link = f'https://zastavok.net'
 
     ua = UserAgent()
@@ -12,7 +14,7 @@ def image_data():
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
         'User-Agent': ua.random
     }
-    for store_number in range(2, 4):
+    for store_number in range(2, 2688):
 
         resource = requests.get(f'{link}/{store_number}', headers=headers).text
         soup = BeautifulSoup(resource, 'lxml')
@@ -29,6 +31,8 @@ def image_data():
                 file.write(image_bytes)
             image_number += 1
             print(image_number)
+            sleep(random.randrange(2, 4))
+
 
 
 if __name__ == '__main__':
