@@ -152,7 +152,7 @@ def get_data():
     #     file.write(response.text)
 
 
-    with open('1_products_ids.json', 'w', encoding='utf-8') as file:
+    with open('../1_products_ids.json', 'w', encoding='utf-8') as file:
         json.dump(products_ids, file, indent=4, ensure_ascii=False)
 
     json_data = {
@@ -174,7 +174,7 @@ def get_data():
 
     response = requests.post('https://www.mvideo.ru/bff/product-details/list', cookies=cookies, headers=headers,
                              json=json_data).json()
-    with open('2_items.json', 'w', encoding='utf-8') as file:
+    with open('../2_items.json', 'w', encoding='utf-8') as file:
         json.dump(response, file, indent=4, ensure_ascii=False)
     # print(len(response.get('body').get('products')))
 
@@ -184,7 +184,7 @@ def get_data():
 
     response = requests.get(f'https://www.mvideo.ru/bff/products/prices?productIds={products_ids_str}&addBonusRubles=true&isPromoApplied=true', cookies=cookies, headers=headers).json()
 
-    with open('3_prices.json', 'w', encoding='utf-8') as file:
+    with open('../3_prices.json', 'w', encoding='utf-8') as file:
         json.dump(response, file, indent=4, ensure_ascii=False)
 
     items_prices = {}
@@ -203,15 +203,15 @@ def get_data():
             'item_bonus': item_bonus
         }
 
-    with open('4_items_prices.json', 'w', encoding='utf-8') as file:
+    with open('../4_items_prices.json', 'w', encoding='utf-8') as file:
         json.dump(items_prices, file, indent=4, ensure_ascii=False)
 
 
 def get_result():
-    with open('2_items.json', encoding='utf-8') as file:
+    with open('../2_items.json', encoding='utf-8') as file:
         products_data = json.load(file)
 
-    with open('4_items_prices.json', encoding='utf-8') as file:
+    with open('../4_items_prices.json', encoding='utf-8') as file:
         products_prices = json.load(file)
 
     products_data = products_data.get('body').get('products')
@@ -226,7 +226,7 @@ def get_result():
         item['item_salePrice'] = prices.get('item_salePrice')
         item['item_bonus'] = prices.get('item_bonus')
 
-    with open('5_result.json', 'w', encoding='utf-8') as file:
+    with open('../5_result.json', 'w', encoding='utf-8') as file:
         json.dump(products_data, file, indent=4, ensure_ascii=False)
 
 

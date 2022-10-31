@@ -27,7 +27,7 @@ response = requests.get(url=link, headers=headers).text
 
 soup = BeautifulSoup(response, 'lxml')
 headerss = soup.find_all('span', class_='share')
-with open(f'rianews.csv', 'w', encoding='utf-8') as file:
+with open(f'../rianews.csv', 'w', encoding='utf-8') as file:
     writer = csv.writer(file)
 
     writer.writerow(
@@ -41,7 +41,7 @@ for header in headerss:
     title_new = header['data-title']
     url_new = header['data-url']
 
-    with open(f'rianews.csv', 'a', encoding='utf-8') as file:
+    with open(f'../rianews.csv', 'a', encoding='utf-8') as file:
         writer = csv.writer(file)
 
         writer.writerow(

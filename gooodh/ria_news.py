@@ -19,7 +19,7 @@ def scap_news():
     soup = BeautifulSoup(response, 'lxml')
     soup_headers = soup.find_all('span', class_='share')
 
-    with open(f'rianews.csv', 'w', encoding='utf-8') as file:
+    with open(f'../rianews.csv', 'w', encoding='utf-8') as file:
         writer = csv.writer(file)
 
         writer.writerow(
@@ -33,7 +33,7 @@ def scap_news():
         title_new = header['data-title']
         url_new = header['data-url']
 
-        with open(f'rianews.csv', 'a', encoding='utf-8') as file:
+        with open(f'../rianews.csv', 'a', encoding='utf-8') as file:
             writer = csv.writer(file)
 
             writer.writerow(
