@@ -1,4 +1,4 @@
-from fake_useragent import UserAgent
+# from fake_useragent import UserAgent
 import requests
 import datetime
 from bs4 import BeautifulSoup
@@ -6,10 +6,10 @@ import csv
 
 cur_time = datetime.datetime.now().strftime('%d_%m_%Y_%H_%M')
 
-ua = UserAgent()
+# ua = UserAgent()
 headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-    'User-Agent': ua.random
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
 }
 link = 'https://ria.ru/'
 # link = 'http://httpbin.org/get'
