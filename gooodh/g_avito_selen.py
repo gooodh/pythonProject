@@ -2,7 +2,7 @@ from fake_useragent import UserAgent
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 import time
-
+import json
 from selenium.webdriver.common.by import By
 
 
@@ -22,6 +22,7 @@ def get_source_html(url):
         button = driver.find_element(By.CLASS_NAME, 'desktop-1kdcmzd')
         time.sleep(50)
         button.click()
+
         with open('page.html', 'w', encoding='utf-8') as file:
             file.write(driver.page_source)
     except Exception as ex:
@@ -32,6 +33,13 @@ def get_source_html(url):
         driver.quit()
 
 
+def get_result():
+    with open('page.html', 'r', encoding='utf-8') as file:
+        products_data = file.read()
+
+
+
 if __name__ == '__main__':
-    url = 'https://www.avito.ru/barnaul/nedvizhimost'
-    get_source_html(url)
+    # url = 'https://www.avito.ru/barnaul/nedvizhimost'
+    # get_source_html(url)
+    get_result()
