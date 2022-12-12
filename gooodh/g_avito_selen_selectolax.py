@@ -22,12 +22,24 @@ def get_source_html(url):
     try:
         driver.get(url=url)
         time.sleep(10)
-        button = driver.find_element(By.CLASS_NAME, 'desktop-1kdcmzd')
-        time.sleep(50)
-        button.click()
+        # button = driver.find_element(By.CLASS_NAME, 'desktop-1kdcmzd')
+        # time.sleep(10)
+        # button.click()
+        tree = HTMLParser(driver.page_source)
+        scripts = tree.css('script')
 
-        with open('page.html', 'w', encoding='utf-8') as file:
-            file.write(driver.page_source)
+        for script in scripts:
+            if 'window.__initialData__' in script.text():
+                json_text = script.text().split(';')[0].split('=')[-1].strip()
+                json_text = unquote(json_text)
+                json_text = json_text[1:-1]
+                json_data = json.loads(json_text)
+                with open('data.json', 'w', encoding='utf-8') as file:
+                    json.dump(json_data, file, ensure_ascii=False)
+        # with open('page.html', 'w', encoding='utf-8') as file:
+        #     file.write(driver.page_source)
+                print('file save')
+
     except Exception as ex:
         print(ex)
 
@@ -37,18 +49,30 @@ def get_source_html(url):
 
 
 def get_result():
-    with open('page.html', 'r', encoding='utf-8') as file:
-        products_data = file.read()
-    tree = HTMLParser(products_data)
-    scripts = tree.css('script')
-    for script in scripts:
-        if 'window.__initialData__' in script.text():
-            json_text = script.text().split(';')[0].split('=')[-1].strip()
-            json_text = unquote(json_text)
-            json_text = json_text[1:-1]
-            json_data = json.loads(json_text)
-            with open('data.json', 'w', encoding='utf-8') as file:
-                json.dump(json_data, file, ensure_ascii=False)
+    with open('data.json', 'r', encoding='utf-8') as file:
+        json_data = json.load(file)
+
+    for key in json_data:
+        if 'single-page' in key:
+            for item in json_data[key]['data']['recommendationsInfinite']['items']:
+
+                title = item['title']
+                price = item['priceDetailed']['value']
+                location = item['location']['name']
+                urlpath = item['urlPath']
+
+                # data_time = item['value']['iva']['BadgeBarStep']['DateInfoStep']['payload']['absolute']
+                print(title, price, location,urlpath)
+    # n=0
+    # for key in json_data:
+    #     if 'single-page' in key:
+    #         for item in json_data[key]['data']['vertical-widgets'] :
+    #             n += 1
+    #             if n == 2:
+    #                 data_time = item['value'].get(
+    #                     'items')  # ['items']['value']['iva']['DateInfoStep']['payload']['absolute']
+    #                 data_time2 = data_time[0]['value']['iva']['DateInfoStep']
+    #                 print(data_time2[0]['payload']['absolute'])
 
 
 if __name__ == '__main__':
