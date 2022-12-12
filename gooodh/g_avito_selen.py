@@ -24,7 +24,7 @@ def get_source_html(url):
         time.sleep(50)
         button.click()
 
-        with open('page0.html', 'w', encoding='utf-8') as file:
+        with open('page.html', 'w', encoding='utf-8') as file:
             file.write(driver.page_source)
     except Exception as ex:
         print(ex)
@@ -35,7 +35,7 @@ def get_source_html(url):
 
 
 def get_result():
-    with open('page0.html', 'r', encoding='utf-8') as file:
+    with open('page.html', 'r', encoding='utf-8') as file:
         products_data = file.read()
     soup = BeautifulSoup(products_data, 'lxml')
     soup_json = soup.find_all('script', class_='window.__initialData__')

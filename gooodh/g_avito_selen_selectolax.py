@@ -36,8 +36,8 @@ def get_source_html(url):
                 json_data = json.loads(json_text)
                 with open('data.json', 'w', encoding='utf-8') as file:
                     json.dump(json_data, file, ensure_ascii=False)
-        # with open('page.html', 'w', encoding='utf-8') as file:
-        #     file.write(driver.page_source)
+                # with open('page.html', 'w', encoding='utf-8') as file:
+                #     file.write(driver.page_source)
                 print('file save')
 
     except Exception as ex:
@@ -49,26 +49,29 @@ def get_source_html(url):
 
 
 def get_result():
+    offers = []
     with open('data.json', 'r', encoding='utf-8') as file:
         json_data = json.load(file)
 
     for key in json_data:
         if 'single-page' in key:
             for item in json_data[key]['data']['recommendationsInfinite']['items']:
+                offer = {}
+                offer['title'] = item['title']
+                offer['price'] = item['priceDetailed']['value']
+                offer['postfix'] = item['priceDetailed']['postfix']
+                offer['location'] = item['location']['name']
+                offer['url'] = 'https://www.avito.ru' + item['urlPath']
+                # offer['data_time'] = item['value']['iva']['BadgeBarStep']['DateInfoStep']['payload']['absolute']
+                offers.append(offer)
+    print(offers)
 
-                title = item['title']
-                price = item['priceDetailed']['value']
-                location = item['location']['name']
-                urlpath = item['urlPath']
-
-                # data_time = item['value']['iva']['BadgeBarStep']['DateInfoStep']['payload']['absolute']
-                print(title, price, location,urlpath)
     # n=0
     # for key in json_data:
     #     if 'single-page' in key:
     #         for item in json_data[key]['data']['vertical-widgets'] :
     #             n += 1
-    #             if n == 2:
+    #             if n == 3:
     #                 data_time = item['value'].get(
     #                     'items')  # ['items']['value']['iva']['DateInfoStep']['payload']['absolute']
     #                 data_time2 = data_time[0]['value']['iva']['DateInfoStep']
@@ -76,6 +79,6 @@ def get_result():
 
 
 if __name__ == '__main__':
-    # url = 'https://www.avito.ru/barnaul/nedvizhimost'
+    # url = 'https://www.avito.ru/moskva/nedvizhimost'
     # get_source_html(url)
     get_result()
