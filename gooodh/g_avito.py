@@ -1,6 +1,9 @@
+import json
+
 import requests
 
-url = 'https://www.avito.ru/barnaul/nedvizhimost'
+# url = 'https://www.avito.ru/barnaul/nedvizhimost?cd=1'
+url = 'https://www.avito.ru/web/1/main/items?forceLocation=false&locationId=621630&lastStamp=1671697322&limit=30&offset=27&categoryId=4'
 
 cookies = {
     'u': '2tj7uqff.hbx1uv.hmkdezkwarg0',
@@ -19,7 +22,7 @@ cookies = {
     'sx': 'H4sIAAAAAAAC/wTAwQ3CMAwF0F3+mUMsk28529DYqOJUQBRIld37DpBkD+Pd6ZVXetqS6mG19G7haAd2NAzp/9/3XV7bXtexZo5Fc3PN+PD2eOKCRBNaUVERm/MMAAD//xRoyqlbAAAA',
     'dfp_group': '89',
     'abp': '0',
-    '_ga_M29JC28873': 'GS1.1.1670226723.4.0.1670226723.60.0.0', \
+    '_ga_M29JC28873': 'GS1.1.1670226723.4.0.1670226723.60.0.0',
     'cto_bundle': 'FLwwY19YdUlHWGFlUWclMkZiU2pESnJ3ZmJNbDdZenNZTkFPZ3NsajhRWlVQNUZxV0FvczJpWE5DWTV4emZvZkFFZkN5TGU3YWxIU1VYWE8lMkZIWnZtWlhKeUVnVEdhZyUyQnQlMkJSM3EyREYwMjRNVW1TTUozS1RkZyUyQm9FRGJ5WXQ0ZHRidW5iMlRxcjFvc2xIWGhCdndLTDNsYXVJZmdnJTNEJTNE',
     'tmr_detect': '0|1670226729567',
     '_ym_visorc': 'b',
@@ -29,6 +32,7 @@ cookies = {
     'ft': '"3uyIZTkktEFYPxrXjnqiE7bqtIoFjfwf6Csh0LnMYoCdyKymVOmK3L92O1hpiFzCGwxkVTMBSsSMRTO8T46fEmZuF8AUBaatfobjEDtdHrTPMLWgTXchfRlj47Snnpu0Hz4+Zz+WtGzrmTR0je7M3KMKrcR+nzru7JY6ZtYsuSPNTP2FdWCKY9NRat5ObqFn"',
     'buyer_from_page': 'main'}
 headers = {
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
     'pragma': 'no-cache',
     'referer': 'https://www.avito.ru/',
     'sec-ch-ua': '"Google Chrome";v="107", "Chromium";v="107", "Not=A?Brand";v="24"',
@@ -41,6 +45,8 @@ headers = {
     'upgrade-insecure-requests': '1',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
 }
-response = requests.get(url, cookies=cookies, headers=headers).json()
+s = requests.session()
+response = s.get(url, cookies=cookies, headers=headers)
 
-print(response)
+with open('data_res.json', 'w', encoding='utf-8') as file:
+    json.dump(response.json(), file, ensure_ascii=False)
