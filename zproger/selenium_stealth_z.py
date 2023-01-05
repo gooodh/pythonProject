@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium_stealth import stealth
 import time
 
@@ -9,8 +10,8 @@ options.add_argument("start-maximized")
 
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option('useAutomationExtension', False)
-driver = webdriver.Chrome(options=options, executable_path=r"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe")
-
+s = Service(executable_path='C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe')
+driver = webdriver.Chrome(service=s, options=options)
 stealth(driver,
         languages=["en-US", "en"],
         vendor="Google Inc.",
