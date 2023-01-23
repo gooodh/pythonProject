@@ -1,0 +1,37 @@
+import requests
+
+link = 'https://stat.doc88.com/count.do?screenSize=1366x768&browser=Chrome&os=UnKnow&c=313637343132313234343435303535382D313431343233373833332D38343731343732382D312D302D32302D31363734313231323434&code=0.23623701002494024&m=0&vm=0&url=https%3A%2F%2Fwww.doc88.com%2Fp-27347070314511.html&app_name=Netscape&refer_url=https%3A%2F%2Fkwork.ru%2F'
+# cookies = {
+#     '__Secure-ab-group': '1',
+#     '__Secure-user-id': '0',
+#     'AREA_ID': '27862',
+#     'xcid': '233507bc7e5aa5e99e8b11d8269af471',
+#     '__Secure-ext_xcid': '233507bc7e5aa5e99e8b11d8269af471',
+#     '_ga': 'GA1.1.1692115107.1666856352',
+#     'cnt_of_orders': '0',
+#     'isBuyer': '0',
+#     '__exponea_etc__': 'e6d76d5a-d0bb-4084-82d5-1d720550f538',
+#     '__Secure-access-token': '3.0.2uBFWIxZTt6a-qNrcW4Hww.1.l8cMBQAAAABjWjWRHUXJ9qN3ZWKgAICQoA..20230119092750.JTk2Kvyy7QxEvHmmtFbHUsYErESZ36HMERj8g2Y0slE',
+#     '__Secure-refresh-token': '3.0.2uBFWIxZTt6a-qNrcW4Hww.1.l8cMBQAAAABjWjWRHUXJ9qN3ZWKgAICQoA..20230119092750.-EiQAioKiiq8glX9tFYED7FEYnWubzChVaG2IbZnf3A',
+#     '__cf_bm': 'zbaOnNrEK.NtGjqvlKBs_T9xlnqzLNgjluwGOEpz7j0-1674113277-0-AZyo6rXgLeCuCN7T2iz9jgPDbSjjqFtojYlbVH1D/msRh8301L20JMATOIYN4CNIqaHbYf4dicYFIWAI1Y4cY2JqDih1ptrTbHduXSuR8EFykrsO9GcBYNio01jUm9JR9boNYxtZP6If3rfLZJ6josf0wUBFx/cYWf5oIRr/9OLwuD462w5vgI2s9sNeEU896A==',
+#     '__exponea_time2__': '2.315485954284668',
+#     'rfuid': 'NjkyNDcyNDUyLDEyNC4wNDM0NzUyNzUxNjA3NCwxMzkzNjg1NDU1LC0xLC0xNjI5NzU1ODQ3LFczc2libUZ0WlNJNklsQkVSaUJXYVdWM1pYSWlMQ0prWlhOamNtbHdkR2x2YmlJNklsQnZjblJoWW14bElFUnZZM1Z0Wlc1MElFWnZjbTFoZENJc0ltMXBiV1ZVZVhCbGN5STZXM3NpZEhsd1pTSTZJbUZ3Y0d4cFkyRjBhVzl1TDNCa1ppSXNJbk4xWm1acGVHVnpJam9pY0dSbUluMHNleUowZVhCbElqb2lkR1Y0ZEM5d1pHWWlMQ0p6ZFdabWFYaGxjeUk2SW5Ca1ppSjlYWDBzZXlKdVlXMWxJam9pUTJoeWIyMWxJRkJFUmlCV2FXVjNaWElpTENKa1pYTmpjbWx3ZEdsdmJpSTZJbEJ2Y25SaFlteGxJRVJ2WTNWdFpXNTBJRVp2Y20xaGRDSXNJbTFwYldWVWVYQmxjeUk2VzNzaWRIbHdaU0k2SW1Gd2NHeHBZMkYwYVc5dUwzQmtaaUlzSW5OMVptWnBlR1Z6SWpvaWNHUm1JbjBzZXlKMGVYQmxJam9pZEdWNGRDOXdaR1lpTENKemRXWm1hWGhsY3lJNkluQmtaaUo5WFgwc2V5SnVZVzFsSWpvaVEyaHliMjFwZFcwZ1VFUkdJRlpwWlhkbGNpSXNJbVJsYzJOeWFYQjBhVzl1SWpvaVVHOXlkR0ZpYkdVZ1JHOWpkVzFsYm5RZ1JtOXliV0YwSWl3aWJXbHRaVlI1Y0dWeklqcGJleUowZVhCbElqb2lZWEJ3YkdsallYUnBiMjR2Y0dSbUlpd2ljM1ZtWm1sNFpYTWlPaUp3WkdZaWZTeDdJblI1Y0dVaU9pSjBaWGgwTDNCa1ppSXNJbk4xWm1acGVHVnpJam9pY0dSbUluMWRmU3g3SW01aGJXVWlPaUpOYVdOeWIzTnZablFnUldSblpTQlFSRVlnVm1sbGQyVnlJaXdpWkdWelkzSnBjSFJwYjI0aU9pSlFiM0owWVdKc1pTQkViMk4xYldWdWRDQkdiM0p0WVhRaUxDSnRhVzFsVkhsd1pYTWlPbHQ3SW5SNWNHVWlPaUpoY0hCc2FXTmhkR2x2Ymk5d1pHWWlMQ0p6ZFdabWFYaGxjeUk2SW5Ca1ppSjlMSHNpZEhsd1pTSTZJblJsZUhRdmNHUm1JaXdpYzNWbVptbDRaWE1pT2lKd1pHWWlmVjE5TEhzaWJtRnRaU0k2SWxkbFlrdHBkQ0JpZFdsc2RDMXBiaUJRUkVZaUxDSmtaWE5qY21sd2RHbHZiaUk2SWxCdmNuUmhZbXhsSUVSdlkzVnRaVzUwSUVadmNtMWhkQ0lzSW0xcGJXVlVlWEJsY3lJNlczc2lkSGx3WlNJNkltRndjR3hwWTJGMGFXOXVMM0JrWmlJc0luTjFabVpwZUdWeklqb2ljR1JtSW4wc2V5SjBlWEJsSWpvaWRHVjRkQzl3WkdZaUxDSnpkV1ptYVhobGN5STZJbkJrWmlKOVhYMWQsV3lKeWRTMVNWU0pkLDAsMSwwLDI0LDIzNzQxNTkzMCw0LDIyNzEyNjUyMCwxLDEsMCwtNDkxMjc1NTIzLFIyOXZaMnhsSUVsdVl5NGdUbVYwYzJOaGNHVWdSMlZqYTI4Z1YybHVNeklnTlM0d0lDaFhhVzVrYjNkeklFNVVJREV3TGpBN0lGZFBWelkwS1NCQmNIQnNaVmRsWWt0cGRDODFNemN1TXpZZ0tFdElWRTFNTENCc2FXdGxJRWRsWTJ0dktTQkRhSEp2YldVdk1UQTRMakF1TUM0d0lGTmhabUZ5YVM4MU16Y3VNellnTWpBd016QXhNRGNnVFc5NmFXeHNZUT09LGV5SmphSEp2YldVaU9uc2lZWEJ3SWpwN0ltbHpTVzV6ZEdGc2JHVmtJanBtWVd4elpTd2lTVzV6ZEdGc2JGTjBZWFJsSWpwN0lrUkpVMEZDVEVWRUlqb2laR2x6WVdKc1pXUWlMQ0pKVGxOVVFVeE1SVVFpT2lKcGJuTjBZV3hzWldRaUxDSk9UMVJmU1U1VFZFRk1URVZFSWpvaWJtOTBYMmx1YzNSaGJHeGxaQ0o5TENKU2RXNXVhVzVuVTNSaGRHVWlPbnNpUTBGT1RrOVVYMUpWVGlJNkltTmhibTV2ZEY5eWRXNGlMQ0pTUlVGRVdWOVVUMTlTVlU0aU9pSnlaV0ZrZVY5MGIxOXlkVzRpTENKU1ZVNU9TVTVISWpvaWNuVnVibWx1WnlKOWZYMTksNjUsLTExMTExNjkzNTIsMSwxLC0xLDE2OTk5NTQ4ODcsMTY5OTk1NDg4NywyOTI0MzUzODMsNA==',
+#     'tmr_lvid': '121296eaaebffadc20650727df59cf75',
+#     'tmr_lvidTS': '1666856358971',
+#     '_ga_JNVTMNXQ6F': 'GS1.1.1674113278.2.1.1674114042.37.0.0',
+#     'tmr_detect': '0|1674114045527'
+#
+# }
+
+headers = {
+
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
+
+}
+
+response = requests.get(url=link, headers=headers).text
+with open('page2.html', 'w', encoding='utf-8') as file:
+    file.write(response)
+
+
