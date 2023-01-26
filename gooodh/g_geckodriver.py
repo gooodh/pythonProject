@@ -1,10 +1,34 @@
+import time
+
 from selenium import webdriver
-# import geckodriver_autoinstaller
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import ui
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-driver = webdriver.Firefox('c:\\Users\\Ser\\PycharmProjects\\pythonProject\\geckodriver.exe')
+driver = webdriver.Firefox(executable_path='/home/nikulin/geckodriver')
+#driver = webdriver.Chrome(executable_path='/home/nikulin/chromedriver')
+# driver.get('https://www.google.com/')
+url='https://www.google.com/'
+try:
+    driver.get(url=url)
+    time.sleep(10)
+    page_url = driver.find_element(By.CLASS_NAME, "//a[@class='content']")
 
-driver.get("http://www.google.com")
+    all_title = driver.find_element(By.CLASS_NAME,"title")
+    title = [title.text for title in all_title]
+    print(title)
+except Exception as ex:
+    print(ex)
+
+finally:
+    driver.close()
+    driver.quit()
+
+page_url = driver.find_elements_by_xpath("//a[@class='content']")
+all_title = driver.find_elements_by_class_name("title")
+title = [title.text for title in all_title]
+print(title)
 
 # geckodriver_autoinstaller.install()
 
