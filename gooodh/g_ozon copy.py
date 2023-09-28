@@ -1,0 +1,40 @@
+import requests
+import json
+cookies = {
+    '__Secure-access-token': '3.0.6VC7vd6sT8iXOqEh344yWw.19.l8cMBQAAAABkoj_dD2Q--aN3ZWKgAICQoA..20230703093013.vSPBpEgwyuo-GZfYLUPvFkw1cqHz25v0CdW-tfnFw2U',
+    '__Secure-refresh-token': '3.0.6VC7vd6sT8iXOqEh344yWw.19.l8cMBQAAAABkoj_dD2Q--aN3ZWKgAICQoA..20230703093013.iCKAHcJjtqSfO5pPMXRrbjm5T5zqEfEu78gTwI4sOGk',
+    '__Secure-ab-group': '19',
+    '__Secure-user-id': '0',
+    '__Secure-ext_xcid': '7fbed78e6c9e33394192245582a2d01a',
+    'rfuid': 'LTE5NTAyNjU0NzAsMzUuNzM4MzM0MDIyNDYyMzcsLTEzMzMwOTcyOTEsTGludXggeDg2XzY0LDIwNzgxOTg0ODQsVzNzaWJtRnRaU0k2SWxCRVJpQldhV1YzWlhJaUxDSmtaWE5qY21sd2RHbHZiaUk2SWxCdmNuUmhZbXhsSUVSdlkzVnRaVzUwSUVadmNtMWhkQ0lzSW0xcGJXVlVlWEJsY3lJNlczc2lkSGx3WlNJNkltRndjR3hwWTJGMGFXOXVMM0JrWmlJc0luTjFabVpwZUdWeklqb2ljR1JtSW4wc2V5SjBlWEJsSWpvaWRHVjRkQzl3WkdZaUxDSnpkV1ptYVhobGN5STZJbkJrWmlKOVhYMHNleUp1WVcxbElqb2lRMmh5YjIxbElGQkVSaUJXYVdWM1pYSWlMQ0prWlhOamNtbHdkR2x2YmlJNklsQnZjblJoWW14bElFUnZZM1Z0Wlc1MElFWnZjbTFoZENJc0ltMXBiV1ZVZVhCbGN5STZXM3NpZEhsd1pTSTZJbUZ3Y0d4cFkyRjBhVzl1TDNCa1ppSXNJbk4xWm1acGVHVnpJam9pY0dSbUluMHNleUowZVhCbElqb2lkR1Y0ZEM5d1pHWWlMQ0p6ZFdabWFYaGxjeUk2SW5Ca1ppSjlYWDBzZXlKdVlXMWxJam9pUTJoeWIyMXBkVzBnVUVSR0lGWnBaWGRsY2lJc0ltUmxjMk55YVhCMGFXOXVJam9pVUc5eWRHRmliR1VnUkc5amRXMWxiblFnUm05eWJXRjBJaXdpYldsdFpWUjVjR1Z6SWpwYmV5SjBlWEJsSWpvaVlYQndiR2xqWVhScGIyNHZjR1JtSWl3aWMzVm1abWw0WlhNaU9pSndaR1lpZlN4N0luUjVjR1VpT2lKMFpYaDBMM0JrWmlJc0luTjFabVpwZUdWeklqb2ljR1JtSW4xZGZTeDdJbTVoYldVaU9pSk5hV055YjNOdlpuUWdSV1JuWlNCUVJFWWdWbWxsZDJWeUlpd2laR1Z6WTNKcGNIUnBiMjRpT2lKUWIzSjBZV0pzWlNCRWIyTjFiV1Z1ZENCR2IzSnRZWFFpTENKdGFXMWxWSGx3WlhNaU9sdDdJblI1Y0dVaU9pSmhjSEJzYVdOaGRHbHZiaTl3WkdZaUxDSnpkV1ptYVhobGN5STZJbkJrWmlKOUxIc2lkSGx3WlNJNkluUmxlSFF2Y0dSbUlpd2ljM1ZtWm1sNFpYTWlPaUp3WkdZaWZWMTlMSHNpYm1GdFpTSTZJbGRsWWt0cGRDQmlkV2xzZEMxcGJpQlFSRVlpTENKa1pYTmpjbWx3ZEdsdmJpSTZJbEJ2Y25SaFlteGxJRVJ2WTNWdFpXNTBJRVp2Y20xaGRDSXNJbTFwYldWVWVYQmxjeUk2VzNzaWRIbHdaU0k2SW1Gd2NHeHBZMkYwYVc5dUwzQmtaaUlzSW5OMVptWnBlR1Z6SWpvaWNHUm1JbjBzZXlKMGVYQmxJam9pZEdWNGRDOXdaR1lpTENKemRXWm1hWGhsY3lJNkluQmtaaUo5WFgxZCxXeUp5ZFMxU1ZTSXNJbkoxTFZKVklpd2ljblVpTENKbGJpMVZVeUlzSW1WdUlsMD0sMCwxLDAsMjQsMjM3NDE1OTMwLC0xLDIyNzEyNjUyMCwwLDEsMCwtNDkxMjc1NTIzLElFNWxkSE5qWVhCbElFZGxZMnR2SUV4cGJuVjRJSGc0Tmw4Mk5DQTFMakFnS0ZneE1Ta2dNakF4TURBeE1ERWdUVzk2YVd4c1lRPT0sZTMwPSw2NSwtNTQwMzA2ODY2LDEsMSwtMSwzOTkzMzY4MzgsMTY5OTk1NDg4NywyOTI0MzUzODMsNA==',
+    'ADDRESSBOOKBAR_WEB_CLARIFICATION': '1688354793',
+    'is_cookies_accepted': '1',
+    'AREA_ID': '27862',
+    'xcid': '574b3b411db79da0c6711dec1fb079ce',
+    'guest': 'true',
+    '__cf_bm': '8noAKZl_UH0.xYH0VQfWLVJq99jtWSQwBhtBowGqyY8-1688373101-0-AWBzFHaP0o+JPk48Ftf0Wo3c5JP1e2x+atBuN8NmAzyNQ/3fbBoUcjEBG5anDndH6oOYNwYNhM84b6Nelu6Rx6jVlv/Ng3zL0SqYlSeDhTcm',
+}
+
+headers = {
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/114.0',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+    'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    # 'Accept-Encoding': 'gzip, deflate, br',
+    'Upgrade-Insecure-Requests': '1',
+    'Sec-Fetch-Dest': 'document',
+    'Sec-Fetch-Mode': 'navigate',
+    'Sec-Fetch-Site': 'none',
+    'Sec-Fetch-User': '?1',
+    'Connection': 'keep-alive',
+    # 'Cookie': '__Secure-access-token=3.0.6VC7vd6sT8iXOqEh344yWw.19.l8cMBQAAAABkoj_dD2Q--aN3ZWKgAICQoA..20230703093013.vSPBpEgwyuo-GZfYLUPvFkw1cqHz25v0CdW-tfnFw2U; __Secure-refresh-token=3.0.6VC7vd6sT8iXOqEh344yWw.19.l8cMBQAAAABkoj_dD2Q--aN3ZWKgAICQoA..20230703093013.iCKAHcJjtqSfO5pPMXRrbjm5T5zqEfEu78gTwI4sOGk; __Secure-ab-group=19; __Secure-user-id=0; __Secure-ext_xcid=7fbed78e6c9e33394192245582a2d01a; rfuid=LTE5NTAyNjU0NzAsMzUuNzM4MzM0MDIyNDYyMzcsLTEzMzMwOTcyOTEsTGludXggeDg2XzY0LDIwNzgxOTg0ODQsVzNzaWJtRnRaU0k2SWxCRVJpQldhV1YzWlhJaUxDSmtaWE5qY21sd2RHbHZiaUk2SWxCdmNuUmhZbXhsSUVSdlkzVnRaVzUwSUVadmNtMWhkQ0lzSW0xcGJXVlVlWEJsY3lJNlczc2lkSGx3WlNJNkltRndjR3hwWTJGMGFXOXVMM0JrWmlJc0luTjFabVpwZUdWeklqb2ljR1JtSW4wc2V5SjBlWEJsSWpvaWRHVjRkQzl3WkdZaUxDSnpkV1ptYVhobGN5STZJbkJrWmlKOVhYMHNleUp1WVcxbElqb2lRMmh5YjIxbElGQkVSaUJXYVdWM1pYSWlMQ0prWlhOamNtbHdkR2x2YmlJNklsQnZjblJoWW14bElFUnZZM1Z0Wlc1MElFWnZjbTFoZENJc0ltMXBiV1ZVZVhCbGN5STZXM3NpZEhsd1pTSTZJbUZ3Y0d4cFkyRjBhVzl1TDNCa1ppSXNJbk4xWm1acGVHVnpJam9pY0dSbUluMHNleUowZVhCbElqb2lkR1Y0ZEM5d1pHWWlMQ0p6ZFdabWFYaGxjeUk2SW5Ca1ppSjlYWDBzZXlKdVlXMWxJam9pUTJoeWIyMXBkVzBnVUVSR0lGWnBaWGRsY2lJc0ltUmxjMk55YVhCMGFXOXVJam9pVUc5eWRHRmliR1VnUkc5amRXMWxiblFnUm05eWJXRjBJaXdpYldsdFpWUjVjR1Z6SWpwYmV5SjBlWEJsSWpvaVlYQndiR2xqWVhScGIyNHZjR1JtSWl3aWMzVm1abWw0WlhNaU9pSndaR1lpZlN4N0luUjVjR1VpT2lKMFpYaDBMM0JrWmlJc0luTjFabVpwZUdWeklqb2ljR1JtSW4xZGZTeDdJbTVoYldVaU9pSk5hV055YjNOdlpuUWdSV1JuWlNCUVJFWWdWbWxsZDJWeUlpd2laR1Z6WTNKcGNIUnBiMjRpT2lKUWIzSjBZV0pzWlNCRWIyTjFiV1Z1ZENCR2IzSnRZWFFpTENKdGFXMWxWSGx3WlhNaU9sdDdJblI1Y0dVaU9pSmhjSEJzYVdOaGRHbHZiaTl3WkdZaUxDSnpkV1ptYVhobGN5STZJbkJrWmlKOUxIc2lkSGx3WlNJNkluUmxlSFF2Y0dSbUlpd2ljM1ZtWm1sNFpYTWlPaUp3WkdZaWZWMTlMSHNpYm1GdFpTSTZJbGRsWWt0cGRDQmlkV2xzZEMxcGJpQlFSRVlpTENKa1pYTmpjbWx3ZEdsdmJpSTZJbEJ2Y25SaFlteGxJRVJ2WTNWdFpXNTBJRVp2Y20xaGRDSXNJbTFwYldWVWVYQmxjeUk2VzNzaWRIbHdaU0k2SW1Gd2NHeHBZMkYwYVc5dUwzQmtaaUlzSW5OMVptWnBlR1Z6SWpvaWNHUm1JbjBzZXlKMGVYQmxJam9pZEdWNGRDOXdaR1lpTENKemRXWm1hWGhsY3lJNkluQmtaaUo5WFgxZCxXeUp5ZFMxU1ZTSXNJbkoxTFZKVklpd2ljblVpTENKbGJpMVZVeUlzSW1WdUlsMD0sMCwxLDAsMjQsMjM3NDE1OTMwLC0xLDIyNzEyNjUyMCwwLDEsMCwtNDkxMjc1NTIzLElFNWxkSE5qWVhCbElFZGxZMnR2SUV4cGJuVjRJSGc0Tmw4Mk5DQTFMakFnS0ZneE1Ta2dNakF4TURBeE1ERWdUVzk2YVd4c1lRPT0sZTMwPSw2NSwtNTQwMzA2ODY2LDEsMSwtMSwzOTkzMzY4MzgsMTY5OTk1NDg4NywyOTI0MzUzODMsNA==; ADDRESSBOOKBAR_WEB_CLARIFICATION=1688354793; is_cookies_accepted=1; AREA_ID=27862; xcid=574b3b411db79da0c6711dec1fb079ce; guest=true; __cf_bm=8noAKZl_UH0.xYH0VQfWLVJq99jtWSQwBhtBowGqyY8-1688373101-0-AWBzFHaP0o+JPk48Ftf0Wo3c5JP1e2x+atBuN8NmAzyNQ/3fbBoUcjEBG5anDndH6oOYNwYNhM84b6Nelu6Rx6jVlv/Ng3zL0SqYlSeDhTcm',
+}
+
+params = {
+    'url': '/search/?from_global=true&is_high_rating=t&layout_container=searchMegapagination&layout_page_index=2&sold_out_page=1&text=dt-832+%D0%BC%D1%83%D0%BB%D1%8C%D1%82%D0%B8%D0%BC%D0%B5%D1%82%D1%80',
+}
+
+response = requests.get('https://www.ozon.ru/api/entrypoint-api.bx/page/json/v2', params=params, cookies=cookies, headers=headers)
+
+with open('ozon.json', 'w', encoding='utf-8') as file:
+    json.dump(response.json(), file, ensure_ascii=False)
+

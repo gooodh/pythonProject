@@ -25,8 +25,8 @@ def get_avito_user(url):
     # driver = webdriver.Chrome(service=s, options=options)
     options.add_argument("--user-data-dir=/home/nikulin/.mozilla/firefox/9sf8n1nd.default")
     driver = webdriver.Firefox(executable_path='/home/nikulin/geckodriver')
-
-    get_avito(url, driver)
+    driver.get(url=url)
+    #get_avito(url, driver)
 
 def get_source_html(url):
     options = webdriver.ChromeOptions()
@@ -84,7 +84,7 @@ def get_avito(url,driver):
 
 
 if __name__ == '__main__':
-    url = 'https://www.avito.ru/'
+    url = 'https://www.ozon.ru/'
     # url = 'https://www.avito.ru/#login?authsrc=h'
     # url = 'https://bot.sannysoft.com/'
     # get_source_html(url)
